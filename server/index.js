@@ -4,6 +4,9 @@ const mysql = require("mysql");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10
+
 
 
 const db = mysql.createPool({
@@ -29,13 +32,19 @@ app.post("/signup",(req, res) => {
     const password = req.body.password;
     // const confirmpassword = req.body.confirmpassword;
 
-    db.query(
-        "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
-        [firstname, lastname, username, email, password],
-        (err, result) => {
-          res.send({err: err});
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        if(err) {
+            console.log(err);
         }
-      );
+        db.query(
+            "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
+            [firstname, lastname, username, email, hash],
+            (err, result) => {
+              res.send({err: err});
+            }
+          );
+    })
+
 });
 
 app.post("/signin", (req, res) => {
@@ -44,19 +53,28 @@ app.post("/signin", (req, res) => {
     const password = req.body.password;
 
     db.query(
-        "SELECT * FROM users WHERE Email = ? AND Password = ?",
-        [email, password],
+        "SELECT * FROM users WHERE Email = ?;",
+        email,
         (err, result) => {
             if (err) {
-                console.log("1");
+                console.log("error");
                 res.send({err: err});
             }
             if (result.length > 0) {
-                console.log("2");
-                res.send(result);
+                bcrypt.compare(password, result[0].Password, (error,response)=> {
+                    if(response) {
+                        console.log("succeed");
+                        res.send(result);
+                    } else {
+                        console.log("Wrong password");
+                        res.send({ message: "Wrong password"});
+                        
+                    }
+                });
             } else {
-                console.log("3");
-                res.send({ message: "Wrong email/password"});
+                console.log("Wrong email");
+                res.send({ message: "Wrong email"});
+
             }
 
         }
