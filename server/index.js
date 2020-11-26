@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10
 
 
@@ -32,11 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(
     session({
         key: "ID",
-        secret: "subscribe",
+        secret: "secret",
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 60 * 60 *24, 
+            expires: 60 * 60 * 24, 
         },
     })
 );
@@ -52,7 +52,6 @@ app.post("/signup",(req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    // const confirmpassword = req.body.confirmpassword;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if(err) {
@@ -62,6 +61,7 @@ app.post("/signup",(req, res) => {
             "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
             [firstname, lastname, username, email, hash],
             (err, result) => {
+              console.log(err);
               res.send({err: err});
             }
           );
@@ -70,6 +70,7 @@ app.post("/signup",(req, res) => {
 });
 
 app.get("./signin", (req, res) => {
+    res.send("signin3001");
     if( req.session.user ) {
         res.send({ loggedIn: true, user: req.session.user });
     } else {
@@ -92,10 +93,11 @@ app.post("/signin", (req, res) => {
             if (result.length > 0) {
                 bcrypt.compare(password, result[0].Password, (error,response)=> {
                     if(response) {
-                        req.session.user = result;
                         console.log("Succeedful");
+                        req.session.user = result;
                         console.log(req.session.user);
                         res.send(result);
+                        // res.redirect('localhost:3000');
                     } else {
                         console.log("Wrong password");
                         res.send({ message: "Wrong password"});

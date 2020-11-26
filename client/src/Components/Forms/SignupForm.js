@@ -20,7 +20,6 @@ export default function SignupForm() {
         username: usernameReg,
         password: passwordReg,
       }).then((response) => {
-      // <Alert>{response}</Alert>
         console.log(response);
       })
     );

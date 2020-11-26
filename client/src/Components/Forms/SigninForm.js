@@ -16,9 +16,11 @@ export default function SigninForm() {
       if(response.data.message) {
         alert(response.data.message)
         setLoginStatus(response.data.message);
+        console.log(response);
       } else {
         alert(response.data[0].Email)
         setLoginStatus(response.data[0].Email);
+        console.log(response);
       }
     })
   );
@@ -26,6 +28,10 @@ export default function SigninForm() {
   useEffect(() => {
     Axios.get("http://localhost:3001/signin").then((response) =>{
     console.log(response);
+    if(response.data.loggedIn === true) {
+      console.log(response.data.user[0].Email);
+      setLoginStatus(response.data.user[0].Email);
+    }
     })
   }, []);
 
