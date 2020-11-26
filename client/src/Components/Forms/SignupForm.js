@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 
 
@@ -10,6 +10,8 @@ export default function SignupForm() {
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
 
+    Axios.defaults.withCredentials = true;
+
     const signup = () => (
       Axios.post("http://localhost:3001/signup", {
         firstname: firstnameReg,
@@ -18,14 +20,14 @@ export default function SignupForm() {
         username: usernameReg,
         password: passwordReg,
       }).then((response) => {
+      // <Alert>{response}</Alert>
         console.log(response);
       })
     );
 
-
     return (
       <div id="signup" className="container">
-        <form method="post">
+        <form>
           {/* <?php user_validation();
                 display_message(); ?> */}
           <h1>Life3 Member Sign Up</h1>

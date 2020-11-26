@@ -1,23 +1,37 @@
-import React, { Component, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
+
 
 export default function SigninForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
   const signin = () => (
     Axios.post("http://localhost:3001/signin", {
       email: email,
       password: password,
     }).then((response) => {
-      console.log(response.data);
+      if(response.data.message) {
+        alert(response.data.message)
+        setLoginStatus(response.data.message);
+      } else {
+        alert(response.data[0].Email)
+        setLoginStatus(response.data[0].Email);
+      }
     })
   );
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/signin").then((response) =>{
+    console.log(response);
+    })
+  }, []);
+
     return (
         <div id="signin" className="container">
-        <form className="modal-content" method="post">
+        <form className="modal-content">
         
         {/* <?php login_validation();
                 display_message(); ?> */}
@@ -40,7 +54,10 @@ export default function SigninForm() {
         <input type="checkbox" name="remember"/><span> Remember Me</span>
         <a href="recover.php" className="floatright"><u>Forget Password?</u></a>
         
+        <h1>{loginStatus}22</h1>
         </form>
+
+
     </div>
     );
   

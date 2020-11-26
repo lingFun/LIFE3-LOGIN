@@ -33,7 +33,7 @@ export default class App extends Component {
           <header>
             <NavBar></NavBar>
             <Banner currentPage={this.state.currentPage}></Banner>
-          </header> : ""}
+          </header> : null}
       
             <Switch>
               <Route exact path ="/">
