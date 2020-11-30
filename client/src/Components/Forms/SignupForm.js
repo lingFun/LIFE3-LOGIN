@@ -9,8 +9,8 @@ export default function SignupForm() {
     const [usernameReg, setUsernameReg] = useState("");
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
+    const [confirmpasswordReg, setConfirmpasswordReg] = useState("");
 
-    Axios.defaults.withCredentials = true;
 
     const signup = () => (
       Axios.post("http://localhost:3001/signup", {
@@ -19,6 +19,7 @@ export default function SignupForm() {
         email: emailReg,
         username: usernameReg,
         password: passwordReg,
+        confirmpassword: confirmpasswordReg,
       }).then((response) => {
         console.log(response);
       })
@@ -51,8 +52,8 @@ export default function SignupForm() {
             onChange={(e) => {setPasswordReg(e.target.value);}}/>
       
           <label htmlFor="confirm-password"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Repeat Password" name="CPassword" required/>
-             {/* onChange={(e) => {setConfirmpasswordReg(e.target.value);}} */}
+          <input type="password" placeholder="Repeat Password" name="CPassword" required
+             onChange={(e) => {setConfirmpasswordReg(e.target.value);}}/>
       
       
           <p>By creating an account you agree to our Terms & Privacy.</p>

@@ -777,7 +777,7 @@ header {
 }
 
 
-header .hoveredBar {
+.hoveredBar {
   -webkit-box-shadow: 0px 0px 5px 5px black;
           box-shadow: 0px 0px 5px 5px black;
   background-color: black !important;

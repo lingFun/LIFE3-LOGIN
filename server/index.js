@@ -10,7 +10,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const saltRounds = 10
 
-
+const jwt = require("jsonwebtoken");
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -52,22 +52,50 @@ app.post("/signup",(req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+    const confirmpassword = req.body.confirmpassword;
 
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-        if(err) {
-            console.log(err);
-        }
-        db.query(
-            "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
-            [firstname, lastname, username, email, hash],
-            (err, result) => {
-              console.log(err);
-              res.send({err: err});
+    if(password === confirmpassword) {
+
+        
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+            if(err) {
+                console.log(err);
             }
-          );
-    })
+            db.query(
+                "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
+                [firstname, lastname, username, email, hash],
+                (err, result) => {
+                    console.log(err);
+                    res.send({err: err});
+                }
+                );
+            })
+    } else {
+        res.send("confirm password is not match");
+    }
 
 });
+
+const verifyJWT = (req, res, next) => {
+    const token = req.headers("x-access-token")
+
+    if(!token) {
+        res.send("Need a token.")
+    } else {
+        jwt.verify(token, "jwtSecret", (err, decoded) => {
+            if(err) {
+                res.json({ auth: false, message: "you failed to authenticate"});
+            } else {
+                req.userId = decoded.id;
+                next();
+            }
+        });
+    }
+}
+
+app.get("./isUserAuth", verifyJWT, (req,res)=>{
+    res.send("you are authenticated")
+})
 
 app.get("./signin", (req, res) => {
     res.send("signin3001");
@@ -94,19 +122,28 @@ app.post("/signin", (req, res) => {
                 bcrypt.compare(password, result[0].Password, (error,response)=> {
                     if(response) {
                         console.log("Succeedful");
+                        
+                        const id = result[0].ID;
+                        const token = jwt.sign({id}, "jwtSecret", {
+                            expiresIn: 300,
+                        })
                         req.session.user = result;
+
                         console.log(req.session.user);
-                        res.send(result);
+                        // res.send(result);
+                        res.json({auth: true, token: token, result: result});
+
                         // res.redirect('localhost:3000');
                     } else {
                         console.log("Wrong password");
-                        res.send({ message: "Wrong password"});
-                        
+                        // res.send({ message: "Wrong password"});
+                        res.json({auth: false, message: "wrong username/password"});
                     }
                 });
             } else {
                 console.log("Wrong email/password");
-                res.send({ message: "Wrong email/password"});
+                // res.send({ message: "Wrong email/password"});
+                res.json({auth: false, message: "no user exists"});
 
             }
 
