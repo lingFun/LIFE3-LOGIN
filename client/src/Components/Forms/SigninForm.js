@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 
+
 export default function SigninForm() {
 
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ export default function SigninForm() {
         alert(response.data[0].Email)
         setLoginStatus(true);
         console.log(response);
+        this.props.history.push("/");
       }
     })
   );

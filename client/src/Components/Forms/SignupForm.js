@@ -22,10 +22,14 @@ export default function SignupForm() {
         confirmpassword: confirmpasswordReg,
       }).then((response) => {
         console.log(response);
+        alert(response.data)
       })
     );
 
     return (
+      <div>
+
+
       <div id="signup" className="container">
         <form>
           {/* <?php user_validation();
@@ -65,6 +69,11 @@ export default function SignupForm() {
             
         </form>
     </div>  
-    );
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+  </div>
+  );
   
 }

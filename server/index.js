@@ -28,6 +28,7 @@ app.use(cors ({
 }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 app.use(
     session({
@@ -54,9 +55,20 @@ app.post("/signup",(req, res) => {
     const password = req.body.password;
     const confirmpassword = req.body.confirmpassword;
 
-    if(password === confirmpassword) {
-
-        
+    db.query(
+        "SELECT * FROM users WHERE Email = ?",
+        email,
+        (err, result) => {
+            if (err) {
+                console.log("error");
+                res.send({err: err});
+            }
+            if (result.length > 0) {
+                res.send("error: existing email");
+            }
+        });
+    
+    if(password === confirmpassword) {        
         bcrypt.hash(password, saltRounds, (err, hash) => {
             if(err) {
                 console.log(err);
@@ -93,14 +105,14 @@ const verifyJWT = (req, res, next) => {
     }
 }
 
-app.get("./isUserAuth", verifyJWT, (req,res)=>{
+app.get("/isUserAuth", verifyJWT, (req,res)=>{
     res.send("you are authenticated")
 })
 
-app.get("./signin", (req, res) => {
-    res.send("signin3001");
-    if( req.session.user ) {
-        res.send({ loggedIn: true, user: req.session.user });
+app.get("/signin", (req, res) => {
+    // res.send("signin3001");
+    if( req.session.users ) {
+        res.send({ loggedIn: true, users: req.session.users });
     } else {
         res.send({ loggedIn: false});
     }
@@ -127,13 +139,13 @@ app.post("/signin", (req, res) => {
                         const token = jwt.sign({id}, "jwtSecret", {
                             expiresIn: 300,
                         })
-                        req.session.user = result;
+                        req.session.users = result;
 
-                        console.log(req.session.user);
-                        // res.send(result);
+                        console.log(req.session.users);
+                        res.send(result);
+                        res.redirect('http://localhost:3000/empower');
                         res.json({auth: true, token: token, result: result});
-
-                        // res.redirect('localhost:3000');
+                        // hashHistory.push('/')
                     } else {
                         console.log("Wrong password");
                         // res.send({ message: "Wrong password"});
