@@ -1,5 +1,5 @@
 /* How Can We Help You Section Stylings */
- @import url("https://fonts.googleapis.com/css2?family=Esteban&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");  
+@import url("https://fonts.googleapis.com/css2?family=Esteban&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");  
 /*@import url("https://fonts.googleapis.com/css2?family=Esteban&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");*/
 .mainInfo {
   /* width: 100%; */
@@ -99,9 +99,9 @@
   transition: opacity .5s;
 }
 
-.mainInfo .phase {
+/* .mainInfo .phase {
   text-transform: uppercase;
-}
+} */
 
 .mainInfo img {
   width: 100%;
@@ -173,7 +173,7 @@
 }
 
 .partners h1 {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: black;
   text-align: center;
   font-size: 3rem;
@@ -299,12 +299,12 @@ to Learn and Progress Together" should have the same amount of line spacing as t
 .about p {
   line-height: 2;
   margin: 5vh 0;
-  font-size: 1.2rem;
+  font-size: 2rem;
   padding: 0 10vw;
 }
 
 .aboutContent .click {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: right;
   font-weight: 700;
 }
@@ -357,6 +357,7 @@ to Learn and Progress Together" should have the same amount of line spacing as t
 .testimonials {
   margin-bottom: 10vh;
   position: relative;
+  margin: 0 10vw 10vh 10vw;
 }
 
 .testimonials .carouselControls {
@@ -406,7 +407,7 @@ to Learn and Progress Together" should have the same amount of line spacing as t
   margin-top: 5vh;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .testimonialsHead img {
@@ -532,7 +533,7 @@ to Learn and Progress Together" should have the same amount of line spacing as t
 }
 
 .diverseContentInfo h1 {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: black;
   text-align: center;
   font-size: 3rem;
@@ -571,7 +572,7 @@ to Learn and Progress Together" should have the same amount of line spacing as t
 
 .testimonialsContentInfo {
   text-align: left;
-  margin-left: 230px;
+  margin-left: 15%;
 }
 
 .testimonialsContentInfo p {
@@ -700,7 +701,7 @@ body {
 }
 
 h1 {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 3.5rem;
   font-family: "Montserrat", sans-serif;
   z-index: 1;
@@ -776,8 +777,7 @@ header {
   position: relative;
 }
 
-
-.hoveredBar {
+header .hoveredBar {
   -webkit-box-shadow: 0px 0px 5px 5px black;
           box-shadow: 0px 0px 5px 5px black;
   background-color: black !important;
@@ -787,7 +787,7 @@ header {
   transition: box-shadow 1s, background-color 1s, -webkit-box-shadow 1s;
 }
 
-.navBar {
+header .navBar {
   z-index: 10;
   position: fixed;
   height: 10vh;
@@ -810,7 +810,7 @@ header {
   margin-left: auto;
 }
 
-.navBar .linksContainer {
+header .navBar .linksContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -821,13 +821,13 @@ header {
           align-items: center;
 }
 
-.navBar .navLink {
+header .navBar .navLink {
   display: inline-block;
   margin-left: 60px;
   font-family: "Montserrat", sans-serif;
 }
 
-.navBar .navLinkText {
+header .navBar .navLinkText {
   font-size: 1.5rem;
   text-align: center;
   display: block;
@@ -840,20 +840,20 @@ header {
   transition: opacity 0.5s, color 0.5s;
 }
 
-.navBar .navLinkText:hover {
+header .navBar .navLinkText:hover {
   opacity: 0.8;
   color: mediumaquamarine;
   cursor: pointer;
 }
 
-.navBar .navLogo {
+header .navBar .navLogo {
   height: 95%;
   width: auto;
   left: 5%;
   border-radius: 50%;
 }
-
-.navBar .navLogo img {
+/* made modification based on feedback "Move LIFE3's logo further to the left, and lower it by a hair so it’s not touching the toolbar." */ 
+header .navBar .navLogo img {
   width: auto;
   height: 100%;
   position: absolute;
@@ -864,14 +864,13 @@ header {
   transition: opacity 0.5s;
 }
 
-.navBar .navLogo img:hover {
+header .navBar .navLogo img:hover {
   opacity: 0.5;
 }
 
-.contactUsButton {
+header .contactUsButton {
   z-index: 3;
-  /* margin-left: 60px; */
-  margin: 0;
+  margin-left: 60px;
   width: 200px;
   height: auto;
   border-radius: 20px;
@@ -885,11 +884,11 @@ header {
   transition: opacity 0.5s;
 }
 
-.contactUsButton p {
+header .contactUsButton p {
   white-space: nowrap;
 }
 
- .contactUsButton:hover {
+header .contactUsButton:hover {
   opacity: 0.5;
   cursor: pointer;
 }
@@ -979,22 +978,12 @@ video {
           filter: brightness(0.4);
 }
 
-.videoBackground video {
-  position: fixed;
-}
-
 .bannerContainer {
   width: 100%;
   height: 100%;
   text-shadow: 0px 0px 2px white;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
           clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-}
-
-.bannerContainer2 {
-  min-width: 100%;
-  min-height: 100%;
-  width: 50%;
 }
 
 .banner {
@@ -1040,11 +1029,16 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 90vh;
+  height: 95vh;
   min-height: 750px;
   min-width: 300px;
   clear: both;
   position: relative;
+}
+
+footer p{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
 }
 
 footer .footerLogo {
@@ -1215,7 +1209,7 @@ footer .socialMediaContainer .socialMediaIcon:hover {
 
 .carouselControls .leftArrow,
 .carouselControls .rightArrow {
-  font-size: 5rem;
+  font-size: 3rem;
   color: gray;
   -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
@@ -1654,7 +1648,7 @@ footer .socialMediaContainer .socialMediaIcon:hover {
 
 .projectLightBox h2 {
   font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .projectLightBox .servicesContent {
@@ -1675,7 +1669,7 @@ footer .socialMediaContainer .socialMediaIcon:hover {
 .projectLightBox .phase h2 {
   background-color: mediumaquamarine;
   color: black;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 800;
   font-size: 1.5rem;
   padding: 1%;
@@ -1793,108 +1787,13 @@ footer .socialMediaContainer .socialMediaIcon:hover {
 }
 
 /* End LightBox Stylins */
-
-/* Log In System Styling */
-
-.container input[type=text], input[type=password], input[type=email] {
-  width: 100%;
-  padding: 10px;
-  margin: 20px auto;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-.container input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-  margin-top: 15px;
-}
-
-/* Set a style for all buttons */
-.signupbtn {
-  background-color: #ADF5D9;
-  color: black;
-  /* padding: 14px 20px; */
-  margin: 20px 0;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-  opacity: 0.9;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  /* padding: 14px 20px; */
-  background-color:#e7e7e7;
-  color: #000;
-  margin: 20px 0;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-  opacity: 0.9;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 30px;
-  width: 40vw;
-  margin: auto;
-  margin-bottom: 20vh;
-  position: relative;
-  top: 20vh;
-  background-color: black;
-  color: white;
-}
-
-.container h1{
-  color: #ADF5D9;
-  font-size: 2.3rem;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.floatright{
-  float: right;
-  /* color: black; */
-}
-
-/* End Log In System Styling */
-
-
 /* Media Queries */
 @media (max-width: 1600px), (max-height: 800px) {
   .banner {
     width: 60%;
   }
-  .about .aboutUs {
-    font-size: 4rem;
+  .about h1 {
+    font-size: 2.8rem;
   }
   h1,
   footer h1 {
@@ -1912,7 +1811,6 @@ button:hover {
   }
   p,
   
-  footer p,
   .aboutTeam .teamProfiles figure figcaption p {
     font-size: 1.5rem;
   }
@@ -1955,8 +1853,8 @@ button:hover {
   footer h1 {
     font-size: 3rem;
   }
-  .about .aboutUs {
-    font-size: 3rem;
+  .about h1 {
+    font-size: 2.5rem;
   }
   .banner h2 {
     font-size: 1.5rem;
@@ -1965,7 +1863,7 @@ button:hover {
     width: 60%;
   }
   h2,
-  .navBar,
+  header .navBar,
   footer .contactUsContainer h3,
   .projectInformation .testimonial p,
   .servicesTable th h2,
@@ -1975,7 +1873,6 @@ button:hover {
   .about p,
   p,
   
-  footer p,
   .aboutTeam .teamProfiles figure figcaption p {
     font-size: 1.5rem;
   }
@@ -1993,7 +1890,7 @@ button:hover {
   .phasesTable td {
     font-size: 1rem;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     font-size: 1.3rem;
   }
   header .contactUsButton {
@@ -2094,7 +1991,7 @@ button:hover {
   footer .contactUsForm {
     width: 60%;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     margin-right: 40px;
     margin-left: 0;
   }
@@ -2164,6 +2061,7 @@ button:hover {
     font-size: 1.5rem;
   }
   .aboutUs p,
+  .about p,
   .mainInfo h2,
   .diverseContentInfo p,
   .testimonialsContentInfo p {
@@ -2186,10 +2084,10 @@ button:hover {
   .about .aboutUs {
     font-size: 3rem;
   }
-  .navBar .navLinkText .mainInfo {
+  header .navBar .navLinkText .mainInfo {
     font-size: 1.3rem;
   }
-  .navBar .navLinkText:first-child {
+  header .navBar .navLinkText:first-child {
     padding-right: 4.53%;
   }
   .partners .partnersInfoContainer .partnerLogosContainer {
@@ -2238,7 +2136,7 @@ button:hover {
   .events .eventsContainer figure {
     max-width: 40vw;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     margin-right: 20px;
   }
   footer .contactUsForm {
@@ -2340,7 +2238,7 @@ img {
   .navBar .navLink {
     margin: 0;
   }
-  .navBar .navLogo {
+  header .navBar .navLogo {
     margin-left: 10px;
     width: 20%;
   }
@@ -2349,7 +2247,7 @@ img {
     font-size: 1.3rem;
   }
   h2,
-  .navBar,
+  header .navBar,
   footer .contactUsContainer h3,
   .projectInformation .testimonial p {
     font-size: 0.8rem;
@@ -2368,19 +2266,19 @@ img {
   .phasesTable td {
     font-size: 0.8rem;
   }
-  .navBar {
+  header .navBar {
     padding: 0 4%;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     margin-right: 20px;
     margin-left: 0;
     font-size: 1rem;
   }
-  .contactUsButton .fa-envelope-open-text {
+  header .contactUsButton .fa-envelope-open-text {
     display: inline-block;
     color: white;
   }
-  .contactUsButton p {
+  header .contactUsButton p {
     display: none;
   }
   .ourApproach .serviceStepsContainer figure img {
@@ -2494,7 +2392,7 @@ img {
   .navBar .navLink {
     margin: 0;
   }
-  .navBar .navLogo {
+  header .navBar .navLogo {
     margin-left: 10px;
   }
   .lightBox .contactUsForm form .formInput,
@@ -2552,7 +2450,7 @@ img {
   .navBar .navLink {
     margin: 0;
   }
-  .navBar .navLogo {
+  header .navBar .navLogo {
     margin-left: 10px;
   }
   .about {
@@ -2600,7 +2498,7 @@ img {
     font-size: 1rem;
   }
   h2,
-  .navBar,
+  header .navBar,
   footer .contactUsContainer h3,
   .projectInformation .testimonial p {
     font-size: 0.8rem;
@@ -2684,7 +2582,7 @@ img {
   .events .eventsContainer figure {
     max-width: 20vw;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     font-size: 0.8rem;
   }
 }
@@ -2698,7 +2596,7 @@ img {
     font-size: 0.8rem;
   }
   h2,
-  .navBar,
+  header .navBar,
   footer .contactUsContainer h3,
   .projectInformation .testimonial p {
     font-size: 0.7rem;
@@ -2710,7 +2608,7 @@ img {
     font-size: 0.7rem;
     line-height: 1rem;
   }
-  .navBar .navLinkText {
+  header .navBar .navLinkText {
     font-size: 0.8rem;
   }
   header .homeBanner {

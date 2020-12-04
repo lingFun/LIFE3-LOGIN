@@ -120,7 +120,7 @@ export default class Empower extends Component {
         <div>
           <div className="diverseContentInfo">
             <h1>
-              WE ARE DIVERSE <span className="shadowedText">LIFE3</span>
+              We Are Diverse <span className="shadowedText">LIFE3</span>
             </h1>
             <div className="aboutDiverseContent">
               <p>

@@ -132,7 +132,7 @@ export default class Home extends Component {
         {this.state.openPhaseModule ? this.openPhaseModule() : null}
         {/* How Can We Help You Section */}
         <div className="mainInfo" id="mainInfo">
-          <h1>HOW CAN WE HELP YOU?</h1>
+          <h1>How Can We Help You?</h1>
           <div className="mainInfoContainer">
             <div
               className="phaseContainer slide"
