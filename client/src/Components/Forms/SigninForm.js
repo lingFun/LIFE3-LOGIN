@@ -7,7 +7,8 @@ export default function SigninForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState(false);
+  const [loginStatus, setLoginStatus] = useState("false");
+  const [errorMsg, setErrorMsg] = useState("");
 
 
   const signin = () => (
@@ -20,7 +21,9 @@ export default function SigninForm() {
         alert(response.data.message)
         setLoginStatus(true);
         console.log(response);
+        setLoginStatus(response.data[0].Email);
       } else {
+        setErrorMsg(response.data.message);
         alert(response);
         alert(response.data[0].Email)
         alert(response.data.message);
@@ -74,7 +77,7 @@ export default function SigninForm() {
         <input type="checkbox" name="remember"/><span> Remember Me</span>
         <a href="recover.php" className="floatright"><u>Forget Password?</u></a>
         
-        <h1>{loginStatus && <button onClick={userAuthentication}>Check if Authenticated</button>}</h1>
+        <p>status: {errorMsg}</p>
         </form>
 
 

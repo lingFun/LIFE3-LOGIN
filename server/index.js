@@ -64,7 +64,7 @@ app.post("/signup",(req, res) => {
                 console.log("error");
                 res.send({err: err});
             }
-            if (result) {
+            if (result.length > 0) {
                 console.log("error: existing email");
                 res.send("error: existing email");
             }
@@ -79,7 +79,7 @@ app.post("/signup",(req, res) => {
                     [firstname, lastname, username, email, hash],
                     (err, result2) => {
                         console.log(err);
-                        res.redirect("../dashboard");
+                        // res.redirect("../dashboard");
                         res.send({err: err});
                     }   
                 );
