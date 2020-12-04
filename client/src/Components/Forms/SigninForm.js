@@ -16,14 +16,16 @@ export default function SigninForm() {
       password: password,
     }).then((response) => {
       if(response.data.auth) {
+        alert(response)
         alert(response.data.message)
-        setLoginStatus(false);
-        console.log(response);
-      } else {
-        alert(response.data[0].Email)
         setLoginStatus(true);
         console.log(response);
-        this.props.history.push("/");
+      } else {
+        alert(response);
+        alert(response.data[0].Email)
+        alert(response.data.message);
+        setLoginStatus(false);
+        console.log(response);
       }
     })
   );

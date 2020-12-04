@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const router=express.Router();
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -63,29 +64,32 @@ app.post("/signup",(req, res) => {
                 console.log("error");
                 res.send({err: err});
             }
-            if (result.length > 0) {
+            if (result) {
+                console.log("error: existing email");
                 res.send("error: existing email");
             }
-        });
-    
-    if(password === confirmpassword) {        
-        bcrypt.hash(password, saltRounds, (err, hash) => {
-            if(err) {
-                console.log(err);
-            }
-            db.query(
-                "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
-                [firstname, lastname, username, email, hash],
-                (err, result) => {
-                    console.log(err);
-                    res.send({err: err});
-                }
-                );
-            })
-    } else {
-        res.send("confirm password is not match");
-    }
 
+            else if(password === confirmpassword) {        
+                bcrypt.hash(password, saltRounds, (err, hash) => {
+                if(err) {
+                    console.log(err);
+                }
+                db.query(
+                    "INSERT INTO users (FirstName, LastName, UserName, Email, Password) VALUES (?,?,?,?,?)",
+                    [firstname, lastname, username, email, hash],
+                    (err, result2) => {
+                        console.log(err);
+                        res.redirect("../dashboard");
+                        res.send({err: err});
+                    }   
+                );
+                })
+            } else {
+                console.log("confirm password is not match");
+                res.send("confirm password is not match");
+            }
+
+    });
 });
 
 const verifyJWT = (req, res, next) => {
@@ -130,7 +134,7 @@ app.post("/signin", (req, res) => {
                 console.log("error");
                 res.send({err: err});
             }
-            if (result.length > 0) {
+            if (result.length) {
                 bcrypt.compare(password, result[0].Password, (error,response)=> {
                     if(response) {
                         console.log("Succeedful");
@@ -142,10 +146,9 @@ app.post("/signin", (req, res) => {
                         req.session.users = result;
 
                         console.log(req.session.users);
-                        res.send(result);
-                        res.redirect('http://localhost:3000/empower');
+                        // res.send(result);
+                        
                         res.json({auth: true, token: token, result: result});
-                        // hashHistory.push('/')
                     } else {
                         console.log("Wrong password");
                         // res.send({ message: "Wrong password"});
@@ -153,8 +156,8 @@ app.post("/signin", (req, res) => {
                     }
                 });
             } else {
-                console.log("Wrong email/password");
-                // res.send({ message: "Wrong email/password"});
+                console.log("no user exists");
+                // res.send({ message: "no user exists"});
                 res.json({auth: false, message: "no user exists"});
 
             }
@@ -169,3 +172,8 @@ app.post("/signin", (req, res) => {
 app.listen( 3001, () => {
     console.log("running on port 3001");
 });
+
+router.get('/dashboard', function(req, res, next) {
+    console.log("redirect/dashbord");
+    res.send("Hello User, this your personal dashboard");
+  });
